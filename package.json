@@ -1,0 +1,45 @@
+{
+  "name": "karma-vivaldi-launcher",
+  "version": "0.0.1",
+  "description": "A Karma plugin. Launcher for Vivaldi",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zachjamesgreen/karma-vivaldi-launcher.git"
+  },
+  "keywords": [
+    "karma-plugin",
+    "karma-launcher",
+    "vivaldi"
+  ],
+  "author": "Zach Green <zach@zachgreen.codes>",
+  "dependencies": {
+    "fs-access": "^1.0.0",
+    "which": "^1.2.1"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "eslint": "^1.6.0",
+    "eslint-config-standard": "^4.4.0",
+    "eslint-plugin-standard": "^1.3.1",
+    "grunt": "^0.4.1",
+    "grunt-auto-release": "^0.0.6",
+    "grunt-bump": "^0.6.0",
+    "grunt-conventional-changelog": "^5.0.0",
+    "grunt-conventional-github-releaser": "^0.5.0",
+    "grunt-eslint": "^17.2.0",
+    "grunt-karma": "1.x || ^0.12.1",
+    "grunt-npm": "^0.0.2",
+    "grunt-simple-mocha": "^0.4.0",
+    "jasmine-node": "^1.14.5",
+    "karma": "1.x || ^0.13.10",
+    "karma-mocha": "1.x || ^0.2.0",
+    "load-grunt-tasks": "^3.2.0",
+    "mocha": "^2.3.3",
+    "sinon": "^1.17.1"
+  }
+}
