@@ -44,28 +44,27 @@ var VivaldiBrowser = function (baseBrowserDecorator, args) {
   }
 }
 
-// Return location of chrome.exe file for a given Chrome directory (available: "Chrome", "Chrome SxS").
-// ****************** ONLY LINUX AT THIS TIME ********************
-// function getChromeExe (chromeDirName) {
-//   // Only run these checks on win32
-//   if (process.platform !== 'win32') {
-//     return null
-//   }
-//   var windowsChromeDirectory, i, prefix
-//   var suffix = '\\Google\\' + chromeDirName + '\\Application\\chrome.exe'
-//   var prefixes = [process.env.LOCALAPPDATA, process.env.PROGRAMFILES, process.env['PROGRAMFILES(X86)']]
-//
-//   for (i = 0; i < prefixes.length; i++) {
-//     prefix = prefixes[i]
-//     try {
-//       windowsChromeDirectory = path.join(prefix, suffix)
-//       fsAccess.sync(windowsChromeDirectory)
-//       return windowsChromeDirectory
-//     } catch (e) {}
-//   }
-//
-//   return windowsChromeDirectory
-// }
+// Return location of vivaldi.exe file for a given Vivaldi directory
+ function getVivaldiExe (vivaldiDirName) {
+   // Only run these checks on win32
+   if (process.platform !== 'win32') {
+     return null
+   }
+   var windowsVivaldiDirectory, i, prefix
+   var suffix = '\\' + vivaldiDirName + '\\Application\\vivaldi.exe'
+   var prefixes = [process.env.LOCALAPPDATA, process.env.PROGRAMFILES, process.env['PROGRAMFILES(X86)']]
+
+   for (i = 0; i < prefixes.length; i++) {
+     prefix = prefixes[i]
+     try {
+       windowsVivaldiDirectory = path.join(prefix, suffix)
+       fsAccess.sync(windowsVivaldiDirectory)
+       return windowsVivaldiDirectory
+     } catch (e) {}
+   }
+
+   return windowsVivaldiDirectory
+ }
 
 function getBin (commands) {
   // Don't run these checks on win32
@@ -84,29 +83,26 @@ function getBin (commands) {
   return bin
 }
 
-// ****************** ONLY LINUX AT THIS TIME ********************
-// function getChromeDarwin (defaultPath) {
-//   if (process.platform !== 'darwin') {
-//     return null
-//   }
-//
-//   try {
-//     var homePath = path.join(process.env.HOME, defaultPath)
-//     fsAccess.sync(homePath)
-//     return homePath
-//   } catch (e) {
-//     return defaultPath
-//   }
-// }
+ function getVivaldiDarwin (defaultPath) {
+   if (process.platform !== 'darwin') {
+     return null
+   }
+
+   try {
+     var homePath = path.join(process.env.HOME, defaultPath)
+     fsAccess.sync(homePath)
+     return homePath
+   } catch (e) {
+     return defaultPath
+   }
+ }
 
 VivaldiBrowser.prototype = {
   name: 'Vivaldi',
 
   DEFAULT_CMD: {
-    // Try chromium-browser before chromium to avoid conflict with the legacy
-    // chromium-bsu package previously known as 'chromium' in Debian and Ubuntu.
-    // darwin: getChromeDarwin('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),
-    // win32: getChromeExe('Chrome'),
+    darwin: getVivaldiDarwin('/Applications/Vivaldi.app/Contents/MacOS/Vivaldi'),
+    win32: getVivaldiExe('Vivaldi'),
     linux: getBin(['vivaldi'])
   },
   ENV_CMD: 'VIVALDI_BIN'
